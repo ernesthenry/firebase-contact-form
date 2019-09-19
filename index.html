@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <form class="sucess-none" id="newContact">
+        <div class="inputs">
+            <input type="text" value="" name="FNAME" class="required name" id="name" placeholder="Name:"
+                style=" width: 35%; float: left; background: none; padding: 1.75em 2em; margin: 0; border-radius: .25em; box-shadow: none; border: none;">
+
+            <input type="email" value="" name="EMAIL" class="required email" id="email" placeholder="Email:"
+                style=" width: 65%; float: left; background: none; padding: 1.75em 2em; margin: 0; border-radius: .25em; box-shadow: none; border: none;">
+        </div>
+        <div style="position: absolute; left: -5000px;" aria-hidden="true">
+            <input type="text" name="b_96d9e6e519173af7bdbdab9d_23138bd741" tabindex="-1" value="">
+        </div>
+        <input type="submit" class="btn" value="Submit" name="subscribe" id="submitContact">
+    </form>
+    <!-- <div class="row">
+        <div class="container">
+            <h2>Contact Form</h2>
+            <div class="alert alert-success success-message" style="display:none;">Form submitted successfully.</div>
+            <form id="contactForm">
+                <div class="form-group">
+                    <label for="exampleFullName">Full Name</label>
+                    <input type="text" class="form-control fullname" id="exampleFullName" placeholder="Enter Full Name"
+                        required>
+                </div>
+                <div class="form-group">
+                    <label for="exampleEmail">Email</label>
+                    <input type="email" class="form-control email" id="exampleEmail" placeholder="Enter Email" required>
+                </div>
+                <div class="form-group">
+                    <label for="exampleSubject">Subject</label>
+                    <input type="text" class="form-control subject" id="exampleSubject" placeholder="Enter Subject"
+                        required>
+                </div>
+                <div class="form-group">
+                    <label for="exampleMessage">Message</label>
+                    <textarea class="form-control message" id="exampleMessage" placeholder="Enter Message" cols="30"
+                        rows="10" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+    </div> -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="/__/firebase/6.6.1/firebase-app.js"></script>
+
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#reserved-urls -->
+
+    <!-- Initialize Firebase -->
+    <script src="/__/firebase/init.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            if ($('#newContact').length > 0) {
+                contactScript('forcontact');
+            }
+        });
+        //firebase
+        function contactScript(value) {
+            var a = {
+                apiKey: "AIzaSyBwND3UYXrSvvzdJ_AnR7YNNyTdIqpkpOI",
+                authDomain: "sampledb-4222c.firebaseapp.com",
+                databaseURL: "https://sampledb-4222c.firebaseio.com",
+                projectId: "sampledb-4222c",
+                storageBucket: "",
+                messagingSenderId: "413273807840",
+                appId: "1:413273807840:web:dd722302d1b720d09ca985"
+
+            };
+            firebase.initializeApp(a);
+            var b = firebase.database().ref("messages");
+            $("#newContact").submit(function (a) {
+                $(this), console.log("Submit to Firebase");
+                var c = $("#name").val(),
+                    d = $("#email").val(),
+                    f = { name: c, email: d };
+                return b.push(f).then(function (a) {
+                    $(".sucess").css("display", "block"),
+                        $(".sucess-none").css("display", "none")
+                }), !1
+            })
+        }
+    </script>
+
+    <!-- <script>
+        // Your web app's Firebase configuration
+        var firebaseConfig = {
+            apiKey: "AIzaSyBwND3UYXrSvvzdJ_AnR7YNNyTdIqpkpOI",
+            authDomain: "sampledb-4222c.firebaseapp.com",
+            databaseURL: "https://sampledb-4222c.firebaseio.com",
+            projectId: "sampledb-4222c",
+            storageBucket: "",
+            messagingSenderId: "413273807840",
+            appId: "1:413273807840:web:dd722302d1b720d09ca985"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+
+        var messagesRef = firebase.database().ref('contactformmessages');
+        $('#contactForm').submit(function (e) {
+            e.preventDefault();
+
+            var newMessageRef = messagesRef.push();
+            newMessageRef.set({
+                name: $('.fullname').val(),
+                email: $('.email').val(),
+                subject: $('.subject').val(),
+                message: $('.message').val()
+            });
+
+            $('.success-message').show();
+
+            $('#contactForm')[0].reset();
+        });
+    </script> -->
+</body>
+
+</html>
